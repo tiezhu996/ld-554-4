@@ -15,3 +15,11 @@ export function createEmployee(data: Record<string, unknown>) {
 export function updateEmployee(id: number, data: Record<string, unknown>) {
   return request.put(`/employees/${id}`, data);
 }
+
+export function fetchSalaryChanges(employeeId: number) {
+  return request.get(`/employees/${employeeId}/salary-changes`);
+}
+
+export function createSalaryChange(employeeId: number, data: Record<string, unknown>) {
+  return request.post(`/employees/${employeeId}/salary-changes`, data);
+}

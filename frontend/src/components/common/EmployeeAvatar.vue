@@ -11,7 +11,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
-const props = withDefaults(defineProps<{ name: string; employeeNo: string; size?: 'sm' | 'md' }>(), { size: 'md' });
+const props = withDefaults(defineProps<{ name: string; employeeNo: string; size?: 'sm' | 'md' | 'large' }>(), { size: 'md' });
 const initials = computed(() => props.name.slice(0, 1));
 </script>
 
@@ -36,6 +36,20 @@ const initials = computed(() => props.name.slice(0, 1));
 .employee-avatar.sm > span {
   width: 28px;
   height: 28px;
+}
+
+.employee-avatar.large > span {
+  width: 48px;
+  height: 48px;
+  font-size: 20px;
+}
+
+.employee-avatar.large strong {
+  font-size: 16px;
+}
+
+.employee-avatar.large small {
+  font-size: 12px;
 }
 
 strong,

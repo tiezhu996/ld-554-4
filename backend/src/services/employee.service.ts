@@ -1,5 +1,5 @@
 import { Op, type WhereOptions } from 'sequelize';
-import { Employee, Shift, Store, Transaction } from '../models/index.js';
+import { Employee, Shift, Store, Transaction, SalaryChange } from '../models/index.js';
 import { getPagination } from '../utils/pagination.js';
 import { storeScope } from './scope.service.js';
 import type { AuthUser } from '../types/request.js';
@@ -22,7 +22,14 @@ export async function listEmployees(query: Record<string, unknown>, user?: AuthU
 }
 
 export async function getEmployee(id: number) {
-  return Employee.findByPk(id, { include: [Store, Shift, { model: Transaction, as: 'employeeTransactions' }] });
+  return Employee.findByPk(id, {
+    include: [
+      Store,
+      Shift,
+      { model: Transaction, as: 'employeeTransactions' },
+      { model: SalaryChange, order: [['effectiveMonth', 'DESC'], ['createdAt', 'DESC']] }
+    ]
+  });
 }
 
 export async function createEmployee(payload: Record<string, unknown>) {

@@ -13,4 +13,15 @@ export interface Employee {
   salary: number;
   role: keyof typeof UserRole;
   storeId: number | null;
+  SalaryChanges?: SalaryChange[];
+}
+
+export interface SalaryChange {
+  id: number;
+  employeeId: number;
+  oldSalary: number;
+  newSalary: number;
+  effectiveMonth: string;
+  reason: string;
+  createdAt: string;
 }

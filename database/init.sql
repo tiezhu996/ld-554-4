@@ -85,6 +85,17 @@ CREATE TABLE IF NOT EXISTS transactions (
   CONSTRAINT fk_transaction_store FOREIGN KEY (store_id) REFERENCES stores(id) ON DELETE CASCADE
 );
 
+CREATE TABLE IF NOT EXISTS salary_changes (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  employee_id INT NOT NULL,
+  old_salary DECIMAL(12,2) NOT NULL,
+  new_salary DECIMAL(12,2) NOT NULL,
+  effective_month VARCHAR(7) NOT NULL,
+  reason TEXT NOT NULL,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT fk_salary_change_employee FOREIGN KEY (employee_id) REFERENCES employees(id) ON DELETE CASCADE
+);
+
 CREATE TABLE IF NOT EXISTS audit_logs (
   id INT AUTO_INCREMENT PRIMARY KEY,
   operator_id INT NULL,
